@@ -1,0 +1,201 @@
+/* Contact Section */
+.contact-section {
+  padding: 8rem 0 4rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.section-header .section-title {
+  font-size: 4rem;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, #a855f7, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-subtitle {
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  padding: 0 2rem;
+}
+
+.contact-info-side h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-outfit), sans-serif;
+}
+.contact-info-side > p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 450px;
+}
+
+.info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.info-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: white;
+  flex-shrink: 0;
+}
+.email-bg { background: #4f46e5; }
+.linkedin-bg { background: #0ea5e9; }
+.github-bg { background: #1f2937; }
+.location-bg { background: #ef4444; }
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+}
+.info-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+}
+.info-text a, .info-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #6366f1;
+  text-decoration: none;
+}
+.info-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+.social-connect p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.social-icons {
+  display: flex;
+  gap: 1.25rem;
+}
+.social-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: white;
+  transition: all 0.3s ease;
+}
+.social-icon.github { background: #818cf8; }
+.social-icon.linkedin { background: #6366f1; }
+.social-icon.email { background: #4f46e5; }
+
+.social-icon:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.2);
+}
+
+/* Contact Form Side */
+.contact-form-side {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.form-group input, .form-group textarea {
+  background: var(--bg-color);
+  border: 1px solid var(--card-border);
+  padding: 1.1rem;
+  border-radius: 0.75rem;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.form-group input:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: var(--bg-color);
+}
+.submit-btn {
+  background: linear-gradient(to right, #4f46e5, #9333ea);
+  color: white;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+}
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+  }
+}

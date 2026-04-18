@@ -1,0 +1,109 @@
+/* Projects */
+.projects-section {
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) 6rem;
+  overflow: hidden;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
+  text-align: left;
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+[data-theme='dark'] .project-card:hover {
+  box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.4);
+}
+.card-image {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid var(--card-border);
+  flex-shrink: 0;
+}
+.card-image .img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card:hover .card-image .img {
+  transform: scale(1.08);
+}
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.card-content h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.card-content p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+.project-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex: 1;
+  justify-content: center;
+}
+.project-btn.live {
+  background: var(--accent-gradient);
+  color: white;
+}
+.project-btn.repo {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+}
+.project-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.project-btn.live:hover {
+  filter: brightness(1.1);
+}
+.project-btn.repo:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}

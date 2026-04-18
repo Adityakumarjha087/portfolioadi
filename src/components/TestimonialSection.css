@@ -1,0 +1,72 @@
+/* Testimonial Section Styles */
+.projects-section {
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) 6rem;
+  overflow: hidden;
+}
+
+/* Specific overlay mask for testimonials to allow full-screen feel while fading edges */
+.projects-section .slider-container {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.testimonial-card-marquee {
+  width: 380px;
+  flex-shrink: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.testimonial-card-marquee:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(79, 70, 229, 0.1);
+}
+
+.quote-icon {
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  color: var(--accent-color);
+  opacity: 0.2;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  line-height: 1;
+}
+
+.feedback-text {
+  font-size: 1.05rem;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.author-info h4 {
+  margin-bottom: 0.2rem;
+  font-size: 1.1rem;
+}
+
+.author-info p {
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  margin-bottom: 0.2rem;
+}
+
+.author-info .date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
