@@ -38,6 +38,39 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 15px -3px rgba(0,0,0,0.02);
 }
+
+@media (max-width: 600px) {
+  .timeline {
+    padding-left: 1.5rem;
+    border-left-width: 1px;
+  }
+  .timeline-dot {
+    left: calc(-1.5rem - 9px);
+    width: 16px;
+    height: 16px;
+    top: 10px;
+    box-shadow: 0 0 0 4px var(--bg-color), 0 2px 8px rgba(79, 70, 229, 0.4);
+  }
+  .timeline-content {
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+  .timeline-content:hover {
+    transform: none; /* Disable shift on mobile for stability */
+  }
+  .timeline-content h3 {
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+  .year {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-content p {
+    font-size: 0.95rem;
+  }
+}
+
 .timeline-content:hover {
   transform: translateX(12px);
   border-color: rgba(79, 70, 229, 0.3);
