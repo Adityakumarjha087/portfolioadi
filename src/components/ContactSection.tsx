@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { SiGithub, SiGooglemaps } from "react-icons/si";
 import { FaEnvelope, FaLinkedin, FaPaperPlane } from "react-icons/fa";
 import "./ContactSection.css";
@@ -53,7 +53,7 @@ export function ContactSection() {
     }
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -63,7 +63,7 @@ export function ContactSection() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
