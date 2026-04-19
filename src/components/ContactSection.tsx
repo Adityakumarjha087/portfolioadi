@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { SiGmail, SiGithub, SiGooglemaps } from "react-icons/si";
-import { FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import { SiGithub, SiGooglemaps } from "react-icons/si";
+import { FaEnvelope, FaLinkedin, FaPaperPlane } from "react-icons/fa";
 import "./ContactSection.css";
 
 export function ContactSection() {
@@ -10,97 +12,127 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setStatus("submitting");
     
-    const formData = new FormData(e.currentTarget);
-    // TODO: Replace with your actual Web3Forms Access Key
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
+    // Validation to prevent sending with placeholder values
+    if (!serviceId || serviceId === "your_service_id_here" || 
+        !templateId || templateId === "your_template_id_here" || 
+        !publicKey || publicKey === "your_public_key_here") {
+      console.error("EmailJS Error: Please configure your credentials in .env.local");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+      return;
+    }
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
+      const result = await emailjs.sendForm(
+        serviceId,
+        templateId,
+        form,
+        publicKey
+      );
 
-      if (response.ok) {
+      if (result.text === "OK") {
         setStatus("success");
-        e.currentTarget.reset();
+        form.reset();
         setTimeout(() => setStatus("idle"), 5000); // Reset status after 5s
       } else {
         setStatus("error");
         setTimeout(() => setStatus("idle"), 5000);
       }
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      // Better error logging for debugging
+      console.error("EmailJS Error:", err?.text || err?.message || JSON.stringify(err));
       setStatus("error");
       setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    }
+  };
+
   return (
     <section id="contact" className="contact-section">
-      <div className="section-header">
-        <h2 className="section-title gradient-text">Get In Touch</h2>
+      {/* Decorative Orbs */}
+      <div className="contact-bg-orb orb-1"></div>
+      <div className="contact-bg-orb orb-2"></div>
+
+      <motion.div 
+        className="section-header"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={itemVariants}
+      >
+        <h2 className="section-title">Get In Touch</h2>
         <p className="section-subtitle">
           Ready to bring your ideas to life? Let's collaborate and create something extraordinary together.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="contact-container">
-        <div className="contact-info-side">
+      <motion.div 
+        className="contact-container"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={containerVariants}
+      >
+        <motion.div className="contact-info-side" variants={itemVariants}>
           <h3>Let's Start a Conversation</h3>
           <p>I'm always excited to discuss new projects, creative ideas, or opportunities to be part of your vision.</p>
           
           <div className="info-items">
-            <div className="info-item">
-              <div className="info-icon email-bg">
-                <FaEnvelope />
-              </div>
-              <div className="info-text">
-                <span className="info-label">Email</span>
-                <a href="mailto:9aadityakumar12@gmail.com">9aadityakumar12@gmail.com</a>
-                <span className="info-hint">Best way to reach me</span>
-              </div>
-            </div>
-
-            <div className="info-item">
-              <div className="info-icon linkedin-bg">
-                <FaLinkedin />
-              </div>
-              <div className="info-text">
-                <span className="info-label">LinkedIn</span>
-                <a href="https://linkedin.com/in/adityajha12" target="_blank" rel="noopener noreferrer">linkedin.com/in/adityajha12</a>
-                <span className="info-hint">Professional network</span>
-              </div>
-            </div>
-
-            <div className="info-item">
-              <div className="info-icon github-bg">
-                <SiGithub />
-              </div>
-              <div className="info-text">
-                <span className="info-label">GitHub</span>
-                <a href="https://github.com/Adityakumarjha087" target="_blank" rel="noopener noreferrer">github.com/Adityakumarjha087</a>
-                <span className="info-hint">Code repositories</span>
-              </div>
-            </div>
-
-            <div className="info-item">
-              <div className="info-icon location-bg">
-                <SiGooglemaps />
-              </div>
-              <div className="info-text">
-                <span className="info-label">Location</span>
-                <span className="info-value">New Delhi, India</span>
-                <span className="info-hint">Open to remote work globally</span>
-              </div>
-            </div>
+            {[
+              { icon: <FaEnvelope />, label: "Email", value: "9aadityakumar12@gmail.com", href: "mailto:9aadityakumar12@gmail.com", hint: "Best way to reach me", bg: "email-bg" },
+              { icon: <FaLinkedin />, label: "LinkedIn", value: "adityajha12", href: "https://linkedin.com/in/adityajha12", hint: "Professional network", bg: "linkedin-bg" },
+              { icon: <SiGithub />, label: "GitHub", value: "Adityakumarjha087", href: "https://github.com/Adityakumarjha087", hint: "Code repositories", bg: "github-bg" },
+              { icon: <SiGooglemaps />, label: "Location", value: "New Delhi, India", hint: "Open to remote work globally", bg: "location-bg" }
+            ].map((item, idx) => (
+              <motion.div key={idx} className="info-item" variants={itemVariants}>
+                <div className={`info-icon ${item.bg}`}>
+                  {item.icon}
+                </div>
+                <div className="info-text">
+                  <span className="info-label">{item.label}</span>
+                  {item.href ? (
+                    <a href={item.href} target={item.label !== "Email" ? "_blank" : undefined} rel={item.label !== "Email" ? "noopener noreferrer" : undefined}>
+                      {item.value}
+                    </a>
+                  ) : (
+                    <span className="info-value">{item.value}</span>
+                  )}
+                  <span className="info-hint">{item.hint}</span>
+                </div>
+              </motion.div>
+            ))}
           </div>
+        </motion.div>
 
-
-        </div>
-
-        <div className="contact-form-side">
+        <motion.div className="contact-form-side" variants={itemVariants}>
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
@@ -114,21 +146,22 @@ export function ContactSection() {
               <label htmlFor="message">Message</label>
               <textarea id="message" name="message" placeholder="Tell me about your project..." rows={6} required></textarea>
             </div>
-            <button 
+            <motion.button 
               type="submit" 
               className="submit-btn" 
               disabled={status === "submitting" || status === "success"}
-              style={status === "success" ? { background: "#10b981", boxShadow: "0 4px 12px rgba(16, 185, 129, 0.2)" } : {}}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               <FaPaperPlane className="btn-icon" /> 
               {status === "idle" && "Send Message"}
               {status === "submitting" && "Sending..."}
               {status === "success" && "Message Sent!"}
               {status === "error" && "Error. Try Again."}
-            </button>
+            </motion.button>
           </form>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
